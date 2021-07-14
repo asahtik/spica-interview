@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-2">
+  <img src="assets/images/SpicaLogo.png" height="31" alt="" class="mx-5 my-2" />
+  <button class="navbar-toggler mx-1" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse my-2 mx-5" id="navbarNavDropdown" [ngbCollapse]="isCollapsed">
+     <ul class="navbar-nav mr-auto">
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/employees">Employees</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/presence">Presence</a>
+        </li>
+        <div class="dropdown-divider"></div>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/settings">Settings</a>
+        </li>
+     </ul>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>
