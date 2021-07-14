@@ -58,7 +58,7 @@ export class EmployeeService {
         'Authorization': `SpicaToken ${this.token}`
       })
     };
-    return this.http.put(this.apiUrl + "/TimeApi/Employee?ReferenceID=" + id, emp, properties).toPromise().then(data => data as Employee).catch(this.handleError);
+    return this.http.put(this.apiUrl + "/TimeApi/Employee?Userno=" + id, emp, properties).toPromise().then(data => data as Employee).catch(this.handleError);
   }
 
   public deleteEmployee(id: number): Promise<Employee> {
