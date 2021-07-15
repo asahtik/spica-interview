@@ -11,7 +11,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class UsersComponent implements OnInit {
 
   public employees: Employee[] = [];
-  public employee: Employee | null = null;
+  public employee: Employee = {
+    FirstName: "",
+    LastName: ""
+  };
   public newEmployee: Employee = {
     FirstName: "",
     LastName: ""
@@ -22,6 +25,7 @@ export class UsersComponent implements OnInit {
   public currPage = 1;
 
   public addIsCollapsed = true;
+  public editEnabled = false;
 
   constructor(private empService: EmployeeService, private modalService: NgbModal) { }
 
@@ -31,6 +35,7 @@ export class UsersComponent implements OnInit {
 
   public showDetails(emp: Employee, content: any) {
     this.employee = emp;
+    this.editEnabled = false;
     this.modalService.open(content, { size: 'lg', scrollable: true });
   }
 
@@ -53,10 +58,29 @@ export class UsersComponent implements OnInit {
     });
   }
 
+  public updateEmployee() {
+    if(!this.editEnabled) this.editEnabled = true;
+    else if(this.employee.Id) {
+      this.empService.updateEmployee(this.employee.Id, this.employee).then(emp => {
+        this.updateInList(emp);
+        this.employee = emp;
+        this.editEnabled = false;
+      }).catch(err => {
+        this.errmsg = err;
+      });
+    }
+  }
+
   private clearNewEmployee() {
     this.newEmployee = {
       FirstName: "",
       LastName: ""
+    }
+  }
+
+  private updateInList(e: Employee) {
+    for(var i = 0; i < this.employees.length; i++) {
+      if(this.employees[i].Id == e.Id) this.employees[i] = e;
     }
   }
 

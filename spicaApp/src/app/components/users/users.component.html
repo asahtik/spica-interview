@@ -6,41 +6,239 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="modal-body">
-    <p><b>ID: {{employee ? (employee.Id ? employee.Id : "/") : "/"}}</b></p>
-    <p>Name: {{employee ? (employee.FirstName ? employee.FirstName : "/") : "/"}}</p>
-    <p>Surname: {{employee ? (employee.LastName ? employee.LastName : "/") : "/"}}</p>
-    <p>Middle Name: {{employee ? (employee.MiddleName ? employee.MiddleName : "/") : "/"}}</p>
-    <p>City: {{employee ? (employee.City ? employee.City : "/") : "/"}}</p>
-    <p>Phone: {{employee ? (employee.Phone ? employee.Phone : "/") : "/"}}</p>
-    <p>Address: {{employee ? (employee.Address ? employee.Address : "/") : "/"}}</p>
-    <p>State: {{employee ? (employee.State ? employee.State : "/") : "/"}}</p>
-    <p>Fax: {{employee ? (employee.Fax ? employee.Fax : "/") : "/"}}</p>
-    <p>Reference Id: {{employee ? (employee.ReferenceId ? employee.ReferenceId : "/") : "/"}}</p>
-    <p>Birth: {{employee ? (employee.Birth ? employee.Birth : "/") : "/"}}</p>
-    <p>Working Scheme Type: {{employee ? (employee.WorkingSchemeType ? employee.WorkingSchemeType : "/") : "/"}}</p>
-    <p>Occupation: {{employee ? (employee.Occupation ? employee.Occupation : "/") : "/"}}</p>
-    <p>Unit1: {{employee ? (employee.Unit1 ? employee.Unit1 : "/") : "/"}}</p>
-    <p>Unit2: {{employee ? (employee.Unit2 ? employee.Unit2 : "/") : "/"}}</p>
-    <p>Unit3: {{employee ? (employee.Unit3 ? employee.Unit3 : "/") : "/"}}</p>
-    <p>Email: {{employee ? (employee.Email ? employee.Email : "/") : "/"}}</p>
-    <p>Other: {{employee ? (employee.Other ? employee.Other : "/") : "/"}}</p>
-    <p>Mobile Phone: {{employee ? (employee.MobilePhone ? employee.MobilePhone : "/") : "/"}}</p>
-    <p>Organizational Unit Id: {{employee ? (employee.OrganizationalUnitId ? employee.OrganizationalUnitId : "/") : "/"}}</p>
-    <p>Additional Field 1: {{employee ? (employee.AdditionalField1 ? employee.AdditionalField1 : "/") : "/"}}</p>
-    <p>Additional Field 2: {{employee ? (employee.AdditionalField2 ? employee.AdditionalField2 : "/") : "/"}}</p>
-    <p>Additional Field 3: {{employee ? (employee.AdditionalField3 ? employee.AdditionalField3 : "/") : "/"}}</p>
-    <p>Additional Field 4: {{employee ? (employee.AdditionalField4 ? employee.AdditionalField4 : "/") : "/"}}</p>
-    <p>Additional Field 5: {{employee ? (employee.AdditionalField5 ? employee.AdditionalField5 : "/") : "/"}}</p>
-    <p>Additional Field 6: {{employee ? (employee.AdditionalField6 ? employee.AdditionalField6 : "/") : "/"}}</p>
-    <p>Additional Field 7: {{employee ? (employee.AdditionalField7 ? employee.AdditionalField7 : "/") : "/"}}</p>
-    <p>Additional Field 8: {{employee ? (employee.AdditionalField8 ? employee.AdditionalField8 : "/") : "/"}}</p>
-    <p>Additional Field 9: {{employee ? (employee.AdditionalField9 ? employee.AdditionalField9 : "/") : "/"}}</p>
-    <p>Additional Field 10: {{employee ? (employee.AdditionalField10 ? employee.AdditionalField10 : "/") : "/"}}</p>
-    <p>Active: {{employee ? (employee.Active ? "true" : "false") : "/"}}</p>
-    <p>Current Working Scheme Id: {{employee ? (employee.CurrentWorkingSchemeId ? employee.CurrentWorkingSchemeId : "/") : "/"}}</p>
-  </div>
+  <div *ngIf="editEnabled; then eEnabled else eDisabled"></div>
+  <ng-template #eDisabled>
+    <div class="modal-body">
+      <p><b>ID: {{employee ? (employee.Id ? employee.Id : "/") : "/"}}</b></p>
+      <p>Name: {{employee ? (employee.FirstName ? employee.FirstName : "/") : "/"}}</p>
+      <p>Surname: {{employee ? (employee.LastName ? employee.LastName : "/") : "/"}}</p>
+      <p>Middle Name: {{employee ? (employee.MiddleName ? employee.MiddleName : "/") : "/"}}</p>
+      <p>City: {{employee ? (employee.City ? employee.City : "/") : "/"}}</p>
+      <p>Phone: {{employee ? (employee.Phone ? employee.Phone : "/") : "/"}}</p>
+      <p>Address: {{employee ? (employee.Address ? employee.Address : "/") : "/"}}</p>
+      <p>State: {{employee ? (employee.State ? employee.State : "/") : "/"}}</p>
+      <p>Fax: {{employee ? (employee.Fax ? employee.Fax : "/") : "/"}}</p>
+      <p>Reference Id: {{employee ? (employee.ReferenceId ? employee.ReferenceId : "/") : "/"}}</p>
+      <p>Birth: {{employee ? (employee.Birth ? employee.Birth : "/") : "/"}}</p>
+      <p>Working Scheme Type: {{employee ? (employee.WorkingSchemeType ? employee.WorkingSchemeType : "/") : "/"}}</p>
+      <p>Occupation: {{employee ? (employee.Occupation ? employee.Occupation : "/") : "/"}}</p>
+      <p>Unit1: {{employee ? (employee.Unit1 ? employee.Unit1 : "/") : "/"}}</p>
+      <p>Unit2: {{employee ? (employee.Unit2 ? employee.Unit2 : "/") : "/"}}</p>
+      <p>Unit3: {{employee ? (employee.Unit3 ? employee.Unit3 : "/") : "/"}}</p>
+      <p>Email: {{employee ? (employee.Email ? employee.Email : "/") : "/"}}</p>
+      <p>Other: {{employee ? (employee.Other ? employee.Other : "/") : "/"}}</p>
+      <p>Mobile Phone: {{employee ? (employee.MobilePhone ? employee.MobilePhone : "/") : "/"}}</p>
+      <p>Organizational Unit Id: {{employee ? (employee.OrganizationalUnitId ? employee.OrganizationalUnitId : "/") : "/"}}</p>
+      <p>Additional Field 1: {{employee ? (employee.AdditionalField1 ? employee.AdditionalField1 : "/") : "/"}}</p>
+      <p>Additional Field 2: {{employee ? (employee.AdditionalField2 ? employee.AdditionalField2 : "/") : "/"}}</p>
+      <p>Additional Field 3: {{employee ? (employee.AdditionalField3 ? employee.AdditionalField3 : "/") : "/"}}</p>
+      <p>Additional Field 4: {{employee ? (employee.AdditionalField4 ? employee.AdditionalField4 : "/") : "/"}}</p>
+      <p>Additional Field 5: {{employee ? (employee.AdditionalField5 ? employee.AdditionalField5 : "/") : "/"}}</p>
+      <p>Additional Field 6: {{employee ? (employee.AdditionalField6 ? employee.AdditionalField6 : "/") : "/"}}</p>
+      <p>Additional Field 7: {{employee ? (employee.AdditionalField7 ? employee.AdditionalField7 : "/") : "/"}}</p>
+      <p>Additional Field 8: {{employee ? (employee.AdditionalField8 ? employee.AdditionalField8 : "/") : "/"}}</p>
+      <p>Additional Field 9: {{employee ? (employee.AdditionalField9 ? employee.AdditionalField9 : "/") : "/"}}</p>
+      <p>Additional Field 10: {{employee ? (employee.AdditionalField10 ? employee.AdditionalField10 : "/") : "/"}}</p>
+      <p>Active: {{employee ? (employee.Active ? "true" : "false") : "/"}}</p>
+      <p>Current Working Scheme Id: {{employee ? (employee.CurrentWorkingSchemeId ? employee.CurrentWorkingSchemeId : "/") : "/"}}</p>
+    </div>
+  </ng-template>
+  <ng-template #eEnabled>
+    <div class="modal-body">
+      <p><b>ID: {{employee ? (employee.Id ? employee.Id : "/") : "/"}}</b></p>
+      <form>
+        <div class="form-group row">
+          <label for="inputName" class="col-sm-4 col-form-label">Name:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputName" name="FirstName" [(ngModel)]="employee.FirstName" required>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputSurname" class="col-sm-4 col-form-label">Surname:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputSurname" name="LastName" [(ngModel)]="employee.LastName" required>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputMiddleName" class="col-sm-4 col-form-label">Middle name:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputMiddleName" name="MiddleName" [(ngModel)]="employee.MiddleName">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputCity" class="col-sm-4 col-form-label">City:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputCity" name="City" [(ngModel)]="employee.City">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputPhone" class="col-sm-4 col-form-label">Phone:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputPhone" name="Phone" [(ngModel)]="employee.Phone">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputAddress" class="col-sm-4 col-form-label">Address:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputAddress" name="Address" [(ngModel)]="employee.Address">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputState" class="col-sm-4 col-form-label">State:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputState" name="State" [(ngModel)]="employee.State">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputFax" class="col-sm-4 col-form-label">Fax:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputFax" name="Fax" [(ngModel)]="employee.Fax">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputReferenceId" class="col-sm-4 col-form-label">Reference Id:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputReferenceId" name="ReferenceId" [(ngModel)]="employee.ReferenceId">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputBirth" class="col-sm-4 col-form-label">Birth:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputBirth" name="Birth" [(ngModel)]="employee.Birth">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputWorkingSchemeType" class="col-sm-4 col-form-label">Working scheme type:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputWorkingSchemeType" name="WorkingSchemeType" [(ngModel)]="employee.WorkingSchemeType">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputOccupation" class="col-sm-4 col-form-label">Occupation:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputOccupation" name="Occupation" [(ngModel)]="employee.Occupation">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputUnit1" class="col-sm-4 col-form-label">Unit1:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputUnit1" name="Unit1" [(ngModel)]="employee.Unit1">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputUnit2" class="col-sm-4 col-form-label">Unit2:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputUnit2" name="Unit2" [(ngModel)]="employee.Unit2">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputUnit3" class="col-sm-4 col-form-label">Unit3:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputUnit3" name="Unit3" [(ngModel)]="employee.Unit3">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputEmail" class="col-sm-4 col-form-label">Email:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputEmail" name="Email" [(ngModel)]="employee.Email">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputOther" class="col-sm-4 col-form-label">Other:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputOther" name="Other" [(ngModel)]="employee.Other">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputMobilePhone" class="col-sm-4 col-form-label">Mobile phone:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputMobilePhone" name="MobilePhone" [(ngModel)]="employee.MobilePhone">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputOrganizationalUnitId" class="col-sm-4 col-form-label">Organizational unit Id:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputOrganizationalUnitId" name="OrganizationalUnitId" [(ngModel)]="employee.OrganizationalUnitId">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputAdditionalField1" class="col-sm-4 col-form-label">Additional Field 1:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputAdditionalField1" name="AdditionalField1" [(ngModel)]="employee.AdditionalField1">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputAdditionalField2" class="col-sm-4 col-form-label">Additional Field 2:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputAdditionalField2" name="AdditionalField2" [(ngModel)]="employee.AdditionalField2">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputAdditionalField3" class="col-sm-4 col-form-label">Additional Field 3:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputAdditionalField3" name="AdditionalField3" [(ngModel)]="employee.AdditionalField3">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputAdditionalField4" class="col-sm-4 col-form-label">Additional Field 4:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputAdditionalField4" name="AdditionalField4" [(ngModel)]="employee.AdditionalField4">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputAdditionalField5" class="col-sm-4 col-form-label">Additional Field 5:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputAdditionalField5" name="AdditionalField5" [(ngModel)]="employee.AdditionalField5">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputAdditionalField6" class="col-sm-4 col-form-label">Additional Field 6:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputAdditionalField6" name="AdditionalField6" [(ngModel)]="employee.AdditionalField6">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputAdditionalField7" class="col-sm-4 col-form-label">Additional Field 7:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputAdditionalField7" name="AdditionalField7" [(ngModel)]="employee.AdditionalField7">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputAdditionalField8" class="col-sm-4 col-form-label">Additional Field 8:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputAdditionalField8" name="AdditionalField8" [(ngModel)]="employee.AdditionalField8">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputAdditionalField9" class="col-sm-4 col-form-label">Additional Field 9:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputAdditionalField9" name="AdditionalField9" [(ngModel)]="employee.AdditionalField9">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputAdditionalField10" class="col-sm-4 col-form-label">Additional Field 10:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputAdditionalField10" name="AdditionalField10" [(ngModel)]="employee.AdditionalField10">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputActive" class="col-sm-4 col-form-label">Active:</label>
+          <div class="col-sm-8">
+            <input class="form-check-input position-static" type="checkbox" name="Active" [(ngModel)]="employee.Active">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputCurrentWorkingSchemeId" class="col-sm-4 col-form-label">Current working scheme Id:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputCurrentWorkingSchemeId" name="CurrentWorkingSchemeId" [(ngModel)]="employee.CurrentWorkingSchemeId">
+          </div>
+        </div>
+      </form>
+    </div>
+  </ng-template>
   <div class="modal-footer">
+    <button type="button" class="btn btn-warning" (click)="updateEmployee()">{{editEnabled ? "Save" : "Update"}}</button>
+    <button type="button" class="btn btn-danger">Remove</button>
     <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
   </div>
 </ng-template>
