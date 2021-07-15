@@ -12,11 +12,16 @@ export class UsersComponent implements OnInit {
 
   public employees: Employee[] = [];
   public employee: Employee | null = null;
-  public page: Employee[] = [];
+  public newEmployee: Employee = {
+    FirstName: "",
+    LastName: ""
+  }
   public errmsg?: string;
 
   public pageSize = 30;
   public currPage = 1;
+
+  public addIsCollapsed = true;
 
   constructor(private empService: EmployeeService, private modalService: NgbModal) { }
 
@@ -36,6 +41,23 @@ export class UsersComponent implements OnInit {
     }).catch(err => {
       this.errmsg = err;
     });
+  }
+
+  public addEmployee() {
+    this.empService.addEmployee(this.newEmployee).then(emp => {
+      this.employees.push(emp);
+      this.errmsg = undefined;
+      this.clearNewEmployee();
+    }).catch(err => {
+      this.errmsg = err;
+    });
+  }
+
+  private clearNewEmployee() {
+    this.newEmployee = {
+      FirstName: "",
+      LastName: ""
+    }
   }
 
 }

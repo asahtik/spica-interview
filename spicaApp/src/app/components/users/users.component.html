@@ -46,10 +46,48 @@
 </ng-template>
 
 <div class="container">
-  <!-- Buttons? -->
+  <!-- Buttons -->
   <div class="card my-3 px-2">
     <div class="card-body">
       <button class="btn btn-secondary" (click)="loadEmployees()">Refresh</button>
+      <button class="btn btn-success mx-2" *ngIf="addIsCollapsed" data-toggle="collapse" data-target="#addDropdown" aria-controls="addDropdown" (click)="addIsCollapsed = !addIsCollapsed" [attr.aria-expanded]="!addIsCollapsed">Add</button>
+      <!-- Add employee form -->
+      <div class="collapse mt-3" id="addDropdown" [ngbCollapse]="addIsCollapsed">
+        <form (ngSubmit)="addEmployee()">
+          <div class="row">
+            <div class="col-sm-4 mb-3">
+              <input type="text" class="form-control" placeholder="First name" name="FirstName" [(ngModel)]="newEmployee.FirstName" required>
+            </div>
+            <div class="col-sm-4 mb-3">
+              <input type="text" class="form-control" placeholder="Middle name" name="MiddleName" [(ngModel)]="newEmployee.MiddleName">
+            </div>
+            <div class="col-sm-4 mb-3">
+              <input type="text" class="form-control" placeholder="Last name" name="LastName" [(ngModel)]="newEmployee.LastName" required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 mb-3">
+              <input type="text" class="form-control" placeholder="Phone" name="Phone" [(ngModel)]="newEmployee.Phone">
+            </div>
+            <div class="col-sm-6 mb-3">
+              <input type="text" class="form-control" placeholder="Email" name="Email" [(ngModel)]="newEmployee.Email">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4 mb-3">
+              <input type="text" class="form-control" placeholder="State" name="State" [(ngModel)]="newEmployee.State">
+            </div>
+            <div class="col-sm-4 mb-3">
+              <input type="text" class="form-control" placeholder="City" name="City" [(ngModel)]="newEmployee.City">
+            </div>
+            <div class="col-sm-4 mb-3">
+              <input type="text" class="form-control" placeholder="Address" name="Address" [(ngModel)]="newEmployee.Address">
+            </div>
+          </div>
+          <button type="submit mx-1" class="btn btn-success">Add</button>
+          <button class="btn btn-secondary mx-1" data-toggle="collapse" data-target="#addDropdown" aria-controls="addDropdown" (click)="addIsCollapsed = !addIsCollapsed" [attr.aria-expanded]="!addIsCollapsed">Close</button>
+        </form>
+      </div>
     </div>
   </div>
 
