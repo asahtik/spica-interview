@@ -238,7 +238,7 @@
   </ng-template>
   <div class="modal-footer">
     <button type="button" class="btn btn-warning" (click)="updateEmployee()">{{editEnabled ? "Save" : "Update"}}</button>
-    <button type="button" class="btn btn-danger">Remove</button>
+    <button type="button" class="btn btn-danger" (click)="removeEmployee(modal)">Remove</button>
     <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
   </div>
 </ng-template>

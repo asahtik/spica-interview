@@ -32,7 +32,6 @@ app.put('/api/*', async (req, res) => {
   var url = req.url;
   url = url.slice(5);
   console.log(url);
-  console.log(req.body);
   try {
     const response = await axios.put(apiUrl + url, req.body, {headers: {"Authorization": req.headers.authorization}});
     res.status(response.status).json(response.data);

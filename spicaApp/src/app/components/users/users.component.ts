@@ -71,6 +71,17 @@ export class UsersComponent implements OnInit {
     }
   }
 
+  public removeEmployee(modal: any) {
+    if(this.employee.Id)
+      this.empService.deleteEmployee(this.employee.Id).then(() => {
+        this.updateInList(this.employee, true);
+        this.editEnabled = false;
+        modal.close("Close click");
+      }).catch(err => {
+        this.errmsg = err;
+      });
+  }
+
   private clearNewEmployee() {
     this.newEmployee = {
       FirstName: "",
@@ -78,9 +89,11 @@ export class UsersComponent implements OnInit {
     }
   }
 
-  private updateInList(e: Employee) {
+  private updateInList(e: Employee, remove: boolean = false) {
     for(var i = 0; i < this.employees.length; i++) {
-      if(this.employees[i].Id == e.Id) this.employees[i] = e;
+      if(this.employees[i].Id == e.Id) 
+        if(!remove) this.employees[i] = e;
+        else this.employees.splice(i, 1);
     }
   }
 
