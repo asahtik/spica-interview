@@ -13,7 +13,7 @@ export class EmployeeService {
   private apiUrl = environment.apiUrl;
   private token?: string | null;
 
-  constructor(private http: HttpClient, private settings: SettingsService, @Inject(TOKEN_STORAGE) private localStorage: Storage) { 
+  constructor(private http: HttpClient, settings: SettingsService) { 
     settings.token$.subscribe(t => {
       console.log("Got token");
       this.token = t;

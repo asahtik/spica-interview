@@ -1,3 +1,13 @@
 <div class="container">
-  
+  <form class="form-inline">
+    <div class="form-group row my-3">
+      <label for="tokenInput" class="col-sm-2 col-form-label">Token:</label>
+      <div class="col-sm-8">
+        <div class="form-control d-flex" [ngClass]="isValid ? '' : 'is-invalid'" (click)="tokenIn.focus()">SpicaToken <input class="flex-fill mx-4" type="text" id="tokenInput" name="tokenInput" [(ngModel)]="tokenInput" #tokenIn required></div>
+      </div>
+      <div class="col-sm-2">
+        <button class="btn btn-success w-100" (click)="saveToken()">Save</button>
+      </div>
+    </div>
+  </form>
 </div>
