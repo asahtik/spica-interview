@@ -1,1 +1,90 @@
-<p>presence works!</p>
+<!-- Employee details modal -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Employee Details</h4>
+    <button type="btn btn-light" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p><b>ID: {{employee ? (employee.Id ? employee.Id : "/") : "/"}}</b></p>
+    <p>Name: {{employee ? (employee.FirstName ? employee.FirstName : "/") : "/"}}</p>
+    <p>Surname: {{employee ? (employee.LastName ? employee.LastName : "/") : "/"}}</p>
+    <p>Middle Name: {{employee ? (employee.MiddleName ? employee.MiddleName : "/") : "/"}}</p>
+    <p>City: {{employee ? (employee.City ? employee.City : "/") : "/"}}</p>
+    <p>Phone: {{employee ? (employee.Phone ? employee.Phone : "/") : "/"}}</p>
+    <p>Address: {{employee ? (employee.Address ? employee.Address : "/") : "/"}}</p>
+    <p>State: {{employee ? (employee.State ? employee.State : "/") : "/"}}</p>
+    <p>Fax: {{employee ? (employee.Fax ? employee.Fax : "/") : "/"}}</p>
+    <p>Reference Id: {{employee ? (employee.ReferenceId ? employee.ReferenceId : "/") : "/"}}</p>
+    <p>Birth: {{employee ? (employee.Birth ? employee.Birth : "/") : "/"}}</p>
+    <p>Working Scheme Type: {{employee ? (employee.WorkingSchemeType ? employee.WorkingSchemeType : "/") : "/"}}</p>
+    <p>Occupation: {{employee ? (employee.Occupation ? employee.Occupation : "/") : "/"}}</p>
+    <p>Unit1: {{employee ? (employee.Unit1 ? employee.Unit1 : "/") : "/"}}</p>
+    <p>Unit2: {{employee ? (employee.Unit2 ? employee.Unit2 : "/") : "/"}}</p>
+    <p>Unit3: {{employee ? (employee.Unit3 ? employee.Unit3 : "/") : "/"}}</p>
+    <p>Email: {{employee ? (employee.Email ? employee.Email : "/") : "/"}}</p>
+    <p>Other: {{employee ? (employee.Other ? employee.Other : "/") : "/"}}</p>
+    <p>Mobile Phone: {{employee ? (employee.MobilePhone ? employee.MobilePhone : "/") : "/"}}</p>
+    <p>Organizational Unit Id: {{employee ? (employee.OrganizationalUnitId ? employee.OrganizationalUnitId : "/") : "/"}}</p>
+    <p>Additional Field 1: {{employee ? (employee.AdditionalField1 ? employee.AdditionalField1 : "/") : "/"}}</p>
+    <p>Additional Field 2: {{employee ? (employee.AdditionalField2 ? employee.AdditionalField2 : "/") : "/"}}</p>
+    <p>Additional Field 3: {{employee ? (employee.AdditionalField3 ? employee.AdditionalField3 : "/") : "/"}}</p>
+    <p>Additional Field 4: {{employee ? (employee.AdditionalField4 ? employee.AdditionalField4 : "/") : "/"}}</p>
+    <p>Additional Field 5: {{employee ? (employee.AdditionalField5 ? employee.AdditionalField5 : "/") : "/"}}</p>
+    <p>Additional Field 6: {{employee ? (employee.AdditionalField6 ? employee.AdditionalField6 : "/") : "/"}}</p>
+    <p>Additional Field 7: {{employee ? (employee.AdditionalField7 ? employee.AdditionalField7 : "/") : "/"}}</p>
+    <p>Additional Field 8: {{employee ? (employee.AdditionalField8 ? employee.AdditionalField8 : "/") : "/"}}</p>
+    <p>Additional Field 9: {{employee ? (employee.AdditionalField9 ? employee.AdditionalField9 : "/") : "/"}}</p>
+    <p>Additional Field 10: {{employee ? (employee.AdditionalField10 ? employee.AdditionalField10 : "/") : "/"}}</p>
+    <p>Active: {{employee ? (employee.Active ? "true" : "false") : "/"}}</p>
+    <p>Current Working Scheme Id: {{employee ? (employee.CurrentWorkingSchemeId ? employee.CurrentWorkingSchemeId : "/") : "/"}}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
+
+<div class="container">
+  <h1 class="mt-4 mb-1">Presence</h1>
+  <hr class="mb-5">
+  <!-- Buttons -->
+  <div class="card my-3 px-2">
+    <div class="card-body">
+      <button class="btn btn-secondary mx-2 mb-3" (click)="loadEmployees()">Refresh</button>
+      <!-- Search bar -->
+      <div class="d-flex mt-2 mx-2">
+        <input type="search" id="form1" class="form-control" name="searchString" [(ngModel)]="searchString" id="searchBox" />
+        <button type="button" class="btn btn-primary mx-1" (click)="setSearchTerms()">Search</button>
+        <button type="button" class="btn btn-secondary" (click)="searchTerms = []">X</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table of employees -->
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">FirstName</th>
+        <th scope="col">LastName</th>
+        <th scope="col">Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="employee-table" *ngFor="let emp of employees | slice: (currPage - 1) * pageSize : currPage * pageSize | search: searchTerms" (click)="showDetails(emp, content)">
+        <th scope="row">{{emp.Id}}</th>
+        <td>{{emp.FirstName}}</td>
+        <td>{{emp.LastName}}</td>
+        <td>{{emp.Email || "/"}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <ngb-pagination *ngIf="employees.length > pageSize" [collectionSize]="employees.length" [(page)]="currPage" [pageSize]="pageSize"></ngb-pagination>
+
+  <!-- Error message -->
+  <div *ngIf="errmsg" class="alert alert-danger my-5" role="alert">
+    <h5>Error!</h5>
+    {{errmsg}}
+  </div>
+</div>
