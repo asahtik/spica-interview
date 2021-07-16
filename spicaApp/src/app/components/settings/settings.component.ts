@@ -10,6 +10,8 @@ export class SettingsComponent implements OnInit {
 
   public tokenInput: string | null = null;
   public isValid = true;
+  public errMsg = false;
+  public succMsg = false;
 
   constructor(private settings: SettingsService) { 
     settings.token$.subscribe(t => {
@@ -25,7 +27,13 @@ export class SettingsComponent implements OnInit {
     if(this.tokenInput && this.tokenInput.length > 0) {
       this.settings.setToken(this.tokenInput);
       this.isValid = true;
-    } else this.isValid = false;
+      this.succMsg = true;
+      setTimeout(() => this.succMsg = false, 3000);
+    } else {
+      this.isValid = false;
+      this.errMsg = true;
+      setTimeout(() => this.errMsg = false, 3000);
+    }
   }
 
 }

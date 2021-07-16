@@ -20,6 +20,7 @@ export class UsersComponent implements OnInit {
     LastName: ""
   }
   public errmsg?: string;
+  public succMsg: boolean = false;
 
   public pageSize = 30;
   public currPage = 1;
@@ -57,6 +58,8 @@ export class UsersComponent implements OnInit {
       this.employees.push(emp);
       this.errmsg = undefined;
       this.clearNewEmployee();
+      this.succMsg = true;
+      setTimeout(() => this.succMsg = false, 3000);
     }).catch(err => {
       this.errmsg = err;
     });

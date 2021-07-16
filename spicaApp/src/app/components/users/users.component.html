@@ -253,8 +253,8 @@
       <button class="btn btn-secondary mx-2 mb-3" (click)="loadEmployees()">Refresh</button>
       <button class="btn btn-success mx-2 mb-3" *ngIf="addIsCollapsed" data-toggle="collapse" data-target="#addDropdown" aria-controls="addDropdown" (click)="addIsCollapsed = !addIsCollapsed" [attr.aria-expanded]="!addIsCollapsed">Add</button>
       <!-- Add employee form -->
-      <div class="collapse" id="addDropdown" [ngbCollapse]="addIsCollapsed">
-        <form (ngSubmit)="addEmployee()">
+      <div class="collapse mb-4 mx-2" id="addDropdown" [ngbCollapse]="addIsCollapsed">
+        <form>
           <div class="row">
             <div class="col-sm-4 mb-3">
               <input type="text" class="form-control" placeholder="First name" name="FirstName" [(ngModel)]="newEmployee.FirstName" required>
@@ -285,9 +285,12 @@
               <input type="text" class="form-control" placeholder="Address" name="Address" [(ngModel)]="newEmployee.Address">
             </div>
           </div>
-          <button type="submit mx-1" class="btn btn-success">Add</button>
+          <button (click)="addEmployee()" class="btn btn-success">Add</button>
           <button class="btn btn-secondary mx-1" data-toggle="collapse" data-target="#addDropdown" aria-controls="addDropdown" (click)="addIsCollapsed = !addIsCollapsed" [attr.aria-expanded]="!addIsCollapsed">Close</button>
         </form>
+        <div *ngIf="succMsg" class="alert alert-success my-5" role="alert">
+          <h6>Success!</h6>
+        </div>
       </div>
       <!-- Search bar -->
       <div class="d-flex mt-2 mx-2">

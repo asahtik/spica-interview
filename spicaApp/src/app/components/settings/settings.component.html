@@ -12,4 +12,10 @@
       </div>
     </div>
   </form>
+  <div *ngIf="succMsg" class="alert alert-success my-5" role="alert">
+    <h6>Success!</h6>
+  </div>
+  <div *ngIf="errMsg" class="alert alert-error my-5" role="alert">
+    <h6>Error!</h6>
+  </div>
 </div>
