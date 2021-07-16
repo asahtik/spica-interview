@@ -9,13 +9,15 @@ import { MainComponent } from './components/main/main.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { UsersComponent } from './components/users/users.component';
 import { PresenceComponent } from './components/presence/presence.component';
+import { SearchPipe } from './pipes/search.pipe';
 
 @NgModule({
   declarations: [
     MainComponent,
     SettingsComponent,
     UsersComponent,
-    PresenceComponent
+    PresenceComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,

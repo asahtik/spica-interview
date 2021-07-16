@@ -27,6 +27,9 @@ export class UsersComponent implements OnInit {
   public addIsCollapsed = true;
   public editEnabled = false;
 
+  public searchString = "";
+  public searchTerms: string[] = [];
+
   constructor(private empService: EmployeeService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
@@ -42,6 +45,7 @@ export class UsersComponent implements OnInit {
   public loadEmployees() {
     this.empService.getAllEmployees().then(emp => {
       this.employees = emp;
+      this.searchTerms = [];
       this.errmsg = undefined;
     }).catch(err => {
       this.errmsg = err;
@@ -80,6 +84,10 @@ export class UsersComponent implements OnInit {
       }).catch(err => {
         this.errmsg = err;
       });
+  }
+
+  public setSearchTerms() {
+    this.searchTerms = this.searchString.split(" ");
   }
 
   private clearNewEmployee() {
