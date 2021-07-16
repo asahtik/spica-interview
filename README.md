@@ -1,6 +1,8 @@
-# Navodila za namestitev
+# TimeAPI SPA
 
-## Docker
+## Navodila za namestitev
+
+### Docker
 
 V korenski mapi projekta poženi:
 
@@ -9,7 +11,7 @@ V korenski mapi projekta poženi:
 
 Aplikacija bo na voljo na http://localhost:3000/.
 
-## Nodejs
+### Nodejs
 
 V korenski mapi projekta poženi
 
@@ -17,3 +19,4 @@ V korenski mapi projekta poženi
     npm start
 
 Aplikacija bo na voljo na http://localhost:3000/.
+
