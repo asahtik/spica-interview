@@ -29,23 +29,28 @@ export class PresenceComponent implements OnInit {
     this.loadEmployees();
   }
 
+  // Show employee details
   public showDetails(emp: Employee, content: any) {
     this.employee = emp;
     this.modalService.open(content, { size: 'lg', scrollable: true });
   }
 
+  // Load list of employees from API
   public loadEmployees() {
+    this.searchTerms = [];
+    this.searchString = "";
     this.presService.getAllPresent().then(emp => {
       this.employees = emp;
-      this.searchTerms = [];
       this.errmsg = undefined;
     }).catch(err => {
       this.errmsg = err;
     });
   }
 
+  // Set array of strings to match with employee names
   public setSearchTerms() {
     this.searchTerms = this.searchString.split(" ");
+    this.currPage = 1;
   }
 
 }

@@ -312,7 +312,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="employee-table" *ngFor="let emp of employees | slice: (currPage - 1) * pageSize : currPage * pageSize | search: searchTerms" (click)="showDetails(emp, content)">
+      <tr class="employee-table" *ngFor="let emp of employees | search: searchTerms | slice: (currPage - 1) * pageSize : currPage * pageSize" (click)="showDetails(emp, content)">
         <th scope="row">{{emp.Id}}</th>
         <td>{{emp.FirstName}}</td>
         <td>{{emp.LastName}}</td>
@@ -320,7 +320,7 @@
       </tr>
     </tbody>
   </table>
-  <ngb-pagination *ngIf="employees.length > pageSize" [collectionSize]="employees.length" [(page)]="currPage" [pageSize]="pageSize"></ngb-pagination>
+  <ngb-pagination *ngIf="employees.length > pageSize && searchTerms.length < 1" [collectionSize]="employees.length" [(page)]="currPage" [pageSize]="pageSize"></ngb-pagination>
 
   <!-- Error message -->
   <div *ngIf="errmsg" class="alert alert-danger my-5" role="alert">

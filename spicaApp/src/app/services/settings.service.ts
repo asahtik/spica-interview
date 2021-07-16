@@ -13,11 +13,13 @@ export class SettingsService {
   constructor(@Inject(TOKEN_STORAGE) private localStorage: Storage) { 
   }
 
+  // Set new token
   public setToken(t: string) {
     this.localStorage.setItem('token', t);
     this.token.next(t);
   }
 
+  // Re-send token
   public refresh() {
     this.token.next(this.localStorage.getItem('token'));
   }

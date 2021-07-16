@@ -6,6 +6,7 @@ import { Employee } from '../classes/employee';
 })
 export class SearchPipe implements PipeTransform {
 
+  // Filters employees that do not match search terms
   transform(value: Employee[], terms: string[]): Employee[] {
     if(terms.length == 0) return value;
     else return value.filter(emp => {

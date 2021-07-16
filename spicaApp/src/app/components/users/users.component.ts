@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Employee } from 'src/app/classes/employee';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -37,22 +37,26 @@ export class UsersComponent implements OnInit {
     this.loadEmployees();
   }
 
+  // Show employee details
   public showDetails(emp: Employee, content: any) {
     this.employee = emp;
     this.editEnabled = false;
     this.modalService.open(content, { size: 'lg', scrollable: true });
   }
 
+  // Load list of employees from API
   public loadEmployees() {
+    this.searchTerms = [];
+    this.searchString = "";
     this.empService.getAllEmployees().then(emp => {
       this.employees = emp;
-      this.searchTerms = [];
       this.errmsg = undefined;
     }).catch(err => {
       this.errmsg = err;
     });
   }
 
+  // Add new employee
   public addEmployee() {
     this.empService.addEmployee(this.newEmployee).then(emp => {
       this.employees.push(emp);
@@ -65,6 +69,7 @@ export class UsersComponent implements OnInit {
     });
   }
 
+  // Update selected employee
   public updateEmployee() {
     if(!this.editEnabled) this.editEnabled = true;
     else if(this.employee.Id) {
@@ -78,6 +83,7 @@ export class UsersComponent implements OnInit {
     }
   }
 
+  // Remove selected employee
   public removeEmployee(modal: any) {
     if(this.employee.Id)
       this.empService.deleteEmployee(this.employee.Id).then(() => {
@@ -89,10 +95,13 @@ export class UsersComponent implements OnInit {
       });
   }
 
+  // Set array of strings to match with employee names
   public setSearchTerms() {
     this.searchTerms = this.searchString.split(" ");
+    this.currPage = 1;
   }
 
+  // Clear form for new employee
   private clearNewEmployee() {
     this.newEmployee = {
       FirstName: "",
@@ -100,6 +109,7 @@ export class UsersComponent implements OnInit {
     }
   }
 
+  // Update or remove employee in list
   private updateInList(e: Employee, remove: boolean = false) {
     for(var i = 0; i < this.employees.length; i++) {
       if(this.employees[i].Id == e.Id) 

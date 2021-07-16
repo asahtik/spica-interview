@@ -22,6 +22,7 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  // Save API token
   public saveToken() {
     if(this.tokenInput && this.tokenInput.length > 0) {
       this.settings.setToken(this.tokenInput);

@@ -14,12 +14,12 @@ export class PresenceService {
 
   constructor(private http: HttpClient, settings: SettingsService) { 
     settings.token$.subscribe(t => {
-      console.log("Got token");
       this.token = t;
     });
     settings.refresh();
   }
 
+  // Get list of all employees present
   public getAllPresent(): Promise<Employee[]> {
     if(!this.token || this.token == "empty") return this.handleError("Token not valid. Please set it in settings");
     const properties = {
@@ -30,6 +30,7 @@ export class PresenceService {
     return this.http.get(`${this.apiUrl}/TimeApi/Presence?TimeStamp=${new Date().toISOString()}&OrgUnitID=10000000&showInactiveEmployees=false`, properties).toPromise().then(data => data as Employee[]).catch(this.handleError);
   }
 
+  // Handle http error
   private handleError(err: any): Promise<any> {
     console.error('Error', err.msg || err);
     return Promise.reject(err.msg || err.message || err);
