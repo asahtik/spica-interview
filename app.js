@@ -54,4 +54,9 @@ app.delete('/api/*', async (req, res) => {
   }
 });
 
+app.use(express.static(path.join(__dirname, 'spicaApp', 'build')));
+app.get(['', '/', '/employees', '/settings', '/presence'], (req, res, next) => {
+  res.sendFile(path.join(__dirname, 'spicaApp', 'build', 'index.html'));
+});
+
 module.exports = app;

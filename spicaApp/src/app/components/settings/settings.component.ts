@@ -15,7 +15,6 @@ export class SettingsComponent implements OnInit {
 
   constructor(private settings: SettingsService) { 
     settings.token$.subscribe(t => {
-      console.log("Got token");
       this.tokenInput = t;
     });
     settings.refresh();

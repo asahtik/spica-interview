@@ -11,8 +11,6 @@ export class SettingsService {
   public token$ = this.token.asObservable();
 
   constructor(@Inject(TOKEN_STORAGE) private localStorage: Storage) { 
-    this.localStorage.setItem('token', "EBD9E633-EF6E-468D-BD0A-E9183B615EA7");
-    this.token.next("EBD9E633-EF6E-468D-BD0A-E9183B615EA7");
   }
 
   public setToken(t: string) {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SettingsService } from 'src/app/services/settings.service';
 
 @Component({
   selector: 'app-main',
@@ -8,8 +9,15 @@ import { Component, OnInit } from '@angular/core';
 export class MainComponent implements OnInit {
 
   public isCollapsed = true
+  public tokenIsValid = false;
 
-  constructor() { }
+  constructor(private settings: SettingsService) { 
+    settings.token$.subscribe(t => {
+      if(t && t != "") this.tokenIsValid = true;
+      else this.tokenIsValid = false;
+    });
+    settings.refresh();
+  }
 
   ngOnInit(): void {
   }
